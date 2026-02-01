@@ -3,7 +3,19 @@ import { Button } from "@heroui/button"
 import { Input } from "@heroui/input"
 import { Image } from "@heroui/image"
 
+import { useState } from "react"
+
 export function UploadModal({ uploader }: any) {
+  const [uploading, setUploading] = useState(false)
+
+  function handleUpload(handler: () => void) {
+    setUploading(true)
+
+    uploader.handleUpload(handler).then(() => {
+      setUploading(false)
+    })
+  }
+
   return (
     <Modal isOpen={uploader.isOpen} placement="center" onOpenChange={uploader.onOpenChange} onClose={uploader.handleClose}>
       <ModalContent>
@@ -35,10 +47,11 @@ export function UploadModal({ uploader }: any) {
           </ModalBody>
           <ModalFooter>
             <Button
+              isLoading={uploading}
               isDisabled={!uploader.allowed}
               color="primary"
-              onPress={() => { uploader.handleUpload(onClose) } }
-            >Upload</Button>
+              onPress={() => handleUpload(onClose) }
+            >{!uploading && "Upload"}</Button>
           </ModalFooter>
         </>}
       </ModalContent>
