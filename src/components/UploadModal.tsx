@@ -6,13 +6,13 @@ import { Image } from "@heroui/image"
 import { useState } from "react"
 
 export function UploadModal({ uploader }: any) {
-  const [uploading, setUploading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   function handleUpload(handler: () => void) {
-    setUploading(true)
+    setLoading(true)
 
     uploader.handleUpload(handler).then(() => {
-      setUploading(false)
+      setLoading(false)
     })
   }
 
@@ -47,11 +47,11 @@ export function UploadModal({ uploader }: any) {
           </ModalBody>
           <ModalFooter>
             <Button
-              isLoading={uploading}
+              isLoading={loading}
               isDisabled={!uploader.allowed}
               color="primary"
               onPress={() => handleUpload(onClose) }
-            >{!uploading && "Upload"}</Button>
+            >{!loading && "Upload"}</Button>
           </ModalFooter>
         </>}
       </ModalContent>

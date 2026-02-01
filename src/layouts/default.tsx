@@ -5,7 +5,7 @@ export default function DefaultLayout({
 }) {
   return (
     <div className="relative flex flex-col h-screen">
-      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16 min-h-0">
+      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-8 min-h-0">
         {children}
       </main>
       <footer>

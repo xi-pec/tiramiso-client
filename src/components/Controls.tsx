@@ -1,9 +1,9 @@
 import { Input } from "@heroui/input"
 import { Switch } from "@heroui/switch"
 
-export function Controls({ query, setQuery, destroy, setDestroy }: any) {
+export function Controls({ query, setQuery, destroy, setDestroy, auth }: any) {
   return (
-    <div className="grid sm:grid-cols-[1fr_auto] gap-4 m-4">
+    <div className={`grid ${auth.logged && "sm:grid-cols-[1fr_auto]"} gap-4 m-4`}>
       <Input
         placeholder="Search"
         startContent={
@@ -13,7 +13,7 @@ export function Controls({ query, setQuery, destroy, setDestroy }: any) {
         onValueChange={setQuery}
       />
 
-      <Switch color="danger" className="place-self-center" isSelected={destroy} onValueChange={setDestroy}>Remove Mode</Switch>
+      {auth.logged && <Switch color="danger" className="place-self-center" isSelected={destroy} onValueChange={setDestroy}>Remove Mode</Switch>}
     </div>
   )
 }
