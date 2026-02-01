@@ -271,7 +271,7 @@ export default function IndexPage() {
                   )}
                   <Input
                     type="file"
-                    accept=".png,.jpg"
+                    accept=".png,.jpg,.jpeg"
                     name="item"
                     className="absolute inset-0 opacity-0 cursor-pointer"
                     onChange={handleChange}
