@@ -6,8 +6,6 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    base: mode === "production" ? "/tiramiso-client/" : "/",
-
     server: {
       port: 3000,
       proxy: mode === "development" ? {
