@@ -14,7 +14,7 @@ import { LoginModal } from "@/components/LoginModal"
 
 
 export default function IndexPage() {
-  const { urls, query, setQuery, destroy, setDestroy, remove, load } = useTiramisoData()
+  const { urls, query, setQuery, destroy, setDestroy, remove, load, debounced } = useTiramisoData()
   const uploader = useUploader(load, query)
   const auth = useAuth()
   const { gridRef } = useGridResize(load)
@@ -39,6 +39,7 @@ export default function IndexPage() {
           setDestroy={setDestroy}
           confidence={confidence}
           setConfidence={setConfidence}
+          debounced={debounced}
           auth={auth}
         />
 

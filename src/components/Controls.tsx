@@ -2,7 +2,7 @@ import { Input } from "@heroui/input"
 import { Switch } from "@heroui/switch"
 import { Slider } from "@heroui/slider"
 
-export function Controls({ query, setQuery, destroy, setDestroy, confidence, setConfidence, auth }: any) {
+export function Controls({ query, setQuery, destroy, setDestroy, confidence, setConfidence, debounced, auth }: any) {
   return (
     <div className="grid grid-cols-[1fr_auto] gap-4 m-4">
       <Input
@@ -18,6 +18,7 @@ export function Controls({ query, setQuery, destroy, setDestroy, confidence, set
       {auth.logged && <Switch color="danger" className="place-self-center" isSelected={destroy} onValueChange={setDestroy}>Remove Mode</Switch>}
     
       <Slider
+        isDisabled={debounced == ""}
         className="w-full col-span-2"
         value={confidence}
         onChange={setConfidence}
