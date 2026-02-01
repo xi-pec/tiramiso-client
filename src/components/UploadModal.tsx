@@ -34,7 +34,11 @@ export function UploadModal({ uploader }: any) {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button isDisabled={!uploader.allowed} color="primary" onPress={() => { uploader.handleUpload(onClose) } }>Upload</Button>
+            <Button
+              isDisabled={!uploader.allowed}
+              color="primary"
+              onPress={() => { uploader.handleUpload(onClose) } }
+            >Upload</Button>
           </ModalFooter>
         </>}
       </ModalContent>
