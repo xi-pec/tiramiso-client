@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
 
-export function useUploader(load: () => void) {
+export function useUploader(load: (query?: string) => void, query: string) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
@@ -22,7 +22,7 @@ export function useUploader(load: () => void) {
 
     switch(json.code) {
       case 0:
-        load()
+        query ? load(query) : load()
         return true
       break
 

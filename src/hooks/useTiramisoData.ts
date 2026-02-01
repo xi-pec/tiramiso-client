@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 
 export function useTiramisoData() {
-  const [urls, setUrls] = useState<string[]>([])
+  const [urls, setUrls] = useState<{ path: string, confidence?: number }[]>([])
   const [query, setQuery] = useState<string>("")
   const [debounced, setDebounced] = useState(query)
   const [destroy, setDestroy] = useState(false)
@@ -13,12 +13,7 @@ export function useTiramisoData() {
 
       switch(json.code) {
         case 0:
-          setUrls(json.items
-            .map((item: { path: string, confidence: number }) => {
-              return item.confidence >= 0.25 ? item.path : null
-            })
-            .filter((url: string | null) => url)
-          )
+          setUrls(json.items)
         break
 
         case 1:
@@ -34,7 +29,11 @@ export function useTiramisoData() {
 
       switch(json.code) {
         case 0:
-          setUrls(json.items)
+          setUrls(json.items
+            .map((url: any) => {
+              return { path: url }
+            })
+          )
         break
 
         default:

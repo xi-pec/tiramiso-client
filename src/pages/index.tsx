@@ -1,6 +1,7 @@
 import DefaultLayout from "@/layouts/default"
 import { Image } from "@heroui/image"
 import { Divider } from "@heroui/divider"
+import { useState } from "react"
 
 import { useTiramisoData } from "@/hooks/useTiramisoData"
 import { useUploader } from "@/hooks/useUploader"
@@ -11,11 +12,13 @@ import { Controls } from "@/components/Controls"
 import { UploadModal } from "@/components/UploadModal"
 import { LoginModal } from "@/components/LoginModal"
 
+
 export default function IndexPage() {
   const { urls, query, setQuery, destroy, setDestroy, remove, load } = useTiramisoData()
-  const uploader = useUploader(load)
+  const uploader = useUploader(load, query)
   const auth = useAuth()
   const { gridRef } = useGridResize(load)
+  const [confidence, setConfidence] = useState(0.25)
 
   return (
     <DefaultLayout>
@@ -25,8 +28,8 @@ export default function IndexPage() {
         </div>
 
         <div className="mb-6">
-          <h1 className="w-full text-7xl text-center font-bold text-primary font-[Larken]">TIRAMISO</h1>
-          <h2 className="w-full text-3xl text-center font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
+          <h1 className="w-full text-5xl sm:text-7xl text-center font-bold text-primary font-[Larken]">TIRAMISO</h1>
+          <h2 className="w-full text-xl sm:text-3xl text-center font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
         </div>
         
         <Controls 
@@ -34,6 +37,8 @@ export default function IndexPage() {
           setQuery={setQuery} 
           destroy={destroy} 
           setDestroy={setDestroy}
+          confidence={confidence}
+          setConfidence={setConfidence}
           auth={auth}
         />
 
@@ -50,7 +55,12 @@ export default function IndexPage() {
           />}
           
           {
-            urls.map((url, key) => {
+            urls
+            .map((item: { path: string, confidence?: number }) => {
+              return item.confidence ? item.confidence >= confidence ? item.path : null : item.path
+            })
+            .filter((url: string | null) => url !== null)
+            .map((url, key) => {
               return <Image
                 key={key}
                 isZoomed
