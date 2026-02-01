@@ -1,22 +1,17 @@
 # TIRAMISO
 TIRAMISO (Transformer-based Item Recognition for Actively Missing Objects) is Camp Talusi's submission
-for the 2026 STEM Week AI Hackathon.
+for the 2026 STEM Week AI Hackathon. It comprises of two parts, [the client](https://github.com/xi-pec/tiramiso-client) and [the server](https://github.com/zowlorin/tiramiso-server).
+
+# How To Use
+0. Install dependencies (i.e. `npm install`)
+1. Run (i.e. `npm run dev`)
 
 # Technologies Used
-
-## Client
 - Typescript
 - Vite
 - React
 - Tailwind
 - HeroUI
-
-## Server
-- Python
-- Flask
-- PyTorch
-- Pillow
-- OpenAI CLIP
 
 # Developers
 - zowlorin (AI model development)
