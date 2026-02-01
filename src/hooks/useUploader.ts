@@ -13,7 +13,7 @@ export function useUploader(load: (query?: string) => void, query: string) {
     const formdata = new FormData()
     formdata.append("item", file)
 
-    const response = await fetch("/api/upload", {
+    const response = await fetch(`${process.env.API_URL}/upload`, {
       method: "POST",
       body: formdata
     })

@@ -8,7 +8,7 @@ export function useTiramisoData() {
 
   const load = useCallback(async (query?: string, start: number = 0, count: number = 100) => {
     if (query) {
-      const response = await fetch(`/api/search?query=${encodeURIComponent(query)}&start=${start}&count=${count}`)
+      const response = await fetch(`${process.env.API_URL}/search?query=${encodeURIComponent(query)}&start=${start}&count=${count}`)
       const json = await response.json()
 
       switch(json.code) {
@@ -24,7 +24,7 @@ export function useTiramisoData() {
           console.log("??")
       }
     } else {
-      const response = await fetch("/api/list")
+      const response = await fetch(`${process.env.API_URL}/list`)
       const json = await response.json()
 
       switch(json.code) {
@@ -43,7 +43,7 @@ export function useTiramisoData() {
   }, [])
 
   async function remove(item: string) {
-    const response = await fetch("/api/remove", {
+    const response = await fetch(`${process.env.API_URL}/remove`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ item })

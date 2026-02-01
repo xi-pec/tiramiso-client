@@ -6,6 +6,11 @@ import App from "./App.tsx";
 import { Provider } from "./provider.tsx";
 import "@/styles/globals.css";
 
+process.env.API_URL =
+  import.meta.env.PROD
+    ? "https://api.uma-musu.me"
+    : "/api";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
