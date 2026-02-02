@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
 
+const API_URL = import.meta.env.VITE_API_URL || ""
+
 export function useUploader(load: (query?: string) => void, query: string) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [file, setFile] = useState<File | null>(null)
@@ -13,7 +15,7 @@ export function useUploader(load: (query?: string) => void, query: string) {
     const formdata = new FormData()
     formdata.append("item", file)
 
-    const response = await fetch(`${process.env.API_URL}/upload`, {
+    const response = await fetch(`${API_URL}/upload`, {
       method: "POST",
       body: formdata
     })

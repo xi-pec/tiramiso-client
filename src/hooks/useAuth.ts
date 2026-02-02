@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
 
+const API_URL = import.meta.env.VITE_API_URL || ""
+
 export function useAuth() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [logged, setLogged] = useState<boolean>(false)
@@ -8,7 +10,7 @@ export function useAuth() {
   const [password, setPassword] = useState("")
 
   async function login(username: string, password: string) {
-    const response = await fetch(`${process.env.API_URL}/login`, {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ username, password })
@@ -34,7 +36,7 @@ export function useAuth() {
   }
 
   async function logout() {
-    const response = await fetch(`${process.env.API_URL}/logout`, {
+    const response = await fetch(`${API_URL}/logout`, {
       method: "POST"
     })
 
@@ -58,7 +60,7 @@ export function useAuth() {
   }
 
   async function validate() {
-    const response = await fetch(`${process.env.API_URL}/validate`)
+    const response = await fetch(`${API_URL}/validate`)
     const json = await response.json()
 
     if (json.code === 0) {

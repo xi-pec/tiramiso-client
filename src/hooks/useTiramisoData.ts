@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 
+const API_URL = import.meta.env.VITE_API_URL || ""
+
 export function useTiramisoData() {
   const [urls, setUrls] = useState<{ path: string, confidence?: number }[]>([])
   const [query, setQuery] = useState<string>("")
@@ -8,7 +10,7 @@ export function useTiramisoData() {
 
   const load = useCallback(async (query?: string, start: number = 0, count: number = 100) => {
     if (query) {
-      const response = await fetch(`${process.env.API_URL}/search?query=${encodeURIComponent(query)}&start=${start}&count=${count}`)
+      const response = await fetch(`${API_URL}/search?query=${encodeURIComponent(query)}&start=${start}&count=${count}`)
       const json = await response.json()
 
       switch(json.code) {
@@ -24,7 +26,7 @@ export function useTiramisoData() {
           console.log("??")
       }
     } else {
-      const response = await fetch(`${process.env.API_URL}/list`)
+      const response = await fetch(`${API_URL}/list`)
       const json = await response.json()
 
       switch(json.code) {
@@ -43,7 +45,7 @@ export function useTiramisoData() {
   }, [])
 
   async function remove(item: string) {
-    const response = await fetch(`${process.env.API_URL}/remove`, {
+    const response = await fetch(`${API_URL}/remove`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ item })
