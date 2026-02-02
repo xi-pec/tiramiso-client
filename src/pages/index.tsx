@@ -29,17 +29,17 @@ export default function IndexPage() {
           <Header auth={auth}/>  
         </div>
 
-        <div className="mb-6 grid place-items-center">
-          <Image
+        <div className="mb-6 grid place-items-center lg:grid-cols-[auto_1fr_1fr] lg:gap-16">
+          <Image  
             isBlurred
             src="/icon.png"
             disableSkeleton={true}
-            className="h-[5rem] sm:h-[7rem] mb-8"
+            className="aspect-square h-[5rem] lg:h-[7rem] mb-8"
           />
 
-          <h1 className="w-full text-5xl sm:text-7xl text-center font-bold text-primary font-[Larken]">TIRAMISO</h1>
+          <h1 className="w-full text-5xl sm:text-7xl text-center lg:text-left font-bold text-primary font-[Larken]">TIRAMISO</h1>
 
-          <h2 className="w-full text-xl sm:text-3xl text-center font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
+          <h2 className="w-full text-xl sm:text-3xl text-center lg:text-right font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
         </div>
         
         <Controls 
@@ -55,7 +55,7 @@ export default function IndexPage() {
 
         <Divider />
 
-        {loaded ? <div ref={gridRef} className="z-1 col-1 row-1 flex-1 min-h-0 overflow-y-auto grid grid-cols-[repeat(auto-fit,150px)] auto-rows-[150px] gap-4 justify-center box-border m-4">
+        {loaded ? <div ref={gridRef} className="min-h-[400px] z-1 col-1 row-1 flex-1 min-h-0 overflow-y-auto grid grid-cols-[repeat(auto-fit,150px)] auto-rows-[150px] gap-4 justify-center box-border m-4">
           {auth.logged && <Image
             isZoomed
             className="p-12 bg-default-200"
