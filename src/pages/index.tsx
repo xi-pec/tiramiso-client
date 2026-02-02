@@ -29,17 +29,22 @@ export default function IndexPage() {
           <Header auth={auth}/>  
         </div>
 
-        <div className="mb-6 grid place-items-center lg:grid-cols-[auto_1fr_1fr] lg:gap-16">
-          <Image  
-            isBlurred
-            src="/icon.png"
-            disableSkeleton={true}
-            className="aspect-square h-[5rem] lg:h-[7rem] mb-8"
-          />
+        <div className="">
+          <div className="mb-6 grid place-items-center lg:grid-cols-[auto_auto]">
+            <div className="lg:place-self-end">
+              <Image  
+                isBlurred
+                src="/icon.png"
+                disableSkeleton={true}
+                className="aspect-square h-[5rem] lg:h-[7rem] mb-8"
+              />
+            </div>
 
-          <h1 className="w-full text-5xl sm:text-7xl text-center lg:text-left font-bold text-primary font-[Larken]">TIRAMISO</h1>
-
-          <h2 className="w-full text-xl sm:text-3xl text-center lg:text-right font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
+            <div>
+              <h1 className="text-5xl lg:text-6xl text-center lg:text-left font-bold text-primary font-[Larken]">TIRAMISO</h1>
+              <h2 className="text-xl lg:text-2xl text-center lg:text-left font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
+            </div>
+          </div>
         </div>
         
         <Controls 
