@@ -12,6 +12,7 @@ import { Controls } from "@/components/Controls"
 import { UploadModal } from "@/components/UploadModal"
 import { LoginModal } from "@/components/LoginModal"
 
+const STATIC_URL = import.meta.env.VITE_STATIC_URL || ""
 
 export default function IndexPage() {
   const { urls, query, setQuery, destroy, setDestroy, remove, load, debounced } = useTiramisoData()
@@ -54,7 +55,6 @@ export default function IndexPage() {
             height={150}
             onClick={uploader.onOpen}
           />}
-          
           {
             urls
             .map((item: { path: string, confidence?: number }) => {
@@ -65,7 +65,7 @@ export default function IndexPage() {
               return <Image
                 key={key}
                 isZoomed
-                src={url}
+                src={STATIC_URL ? url.replace("static", STATIC_URL) : url}
                 width={150}
                 height={150}
                 onClick={() => { if (destroy) remove(url.split("/").pop()!) }}
