@@ -17,7 +17,8 @@ export function useUploader(load: (query?: string) => void, query: string) {
 
     const response = await fetch(`${API_URL}/upload`, {
       method: "POST",
-      body: formdata
+      body: formdata,
+      credentials: "include"
     })
 
     const json = await response.json()

@@ -48,7 +48,8 @@ export function useTiramisoData() {
     const response = await fetch(`${API_URL}/remove`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ item })
+      body: JSON.stringify({ item }),
+      credentials: "include"
     })
 
     const json = await response.json()

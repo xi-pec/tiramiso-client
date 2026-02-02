@@ -13,7 +13,8 @@ export function useAuth() {
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
+      credentials: "include"
     })
 
     const json = await response.json()
@@ -37,7 +38,8 @@ export function useAuth() {
 
   async function logout() {
     const response = await fetch(`${API_URL}/logout`, {
-      method: "POST"
+      method: "POST",
+      credentials: "include"
     })
 
     const json = await response.json()
@@ -60,7 +62,7 @@ export function useAuth() {
   }
 
   async function validate() {
-    const response = await fetch(`${API_URL}/validate`)
+    const response = await fetch(`${API_URL}/validate`, { credentials: "include" })
     const json = await response.json()
 
     if (json.code === 0) {
