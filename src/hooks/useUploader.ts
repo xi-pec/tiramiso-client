@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
 
-const API_URL = import.meta.env.VITE_API_URL || ""
+const API_URL = import.meta.env.VITE_API_URL || "/api"
 
 export function useUploader(load: (query?: string) => void, query: string) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()

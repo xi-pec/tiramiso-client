@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
 
-const API_URL = import.meta.env.VITE_API_URL || ""
+const API_URL = import.meta.env.VITE_API_URL || "/api"
+console.log(import.meta.env.VITE_API_URL)
 
 export function useAuth() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()

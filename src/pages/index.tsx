@@ -12,7 +12,7 @@ import { Controls } from "@/components/Controls"
 import { UploadModal } from "@/components/UploadModal"
 import { LoginModal } from "@/components/LoginModal"
 
-const STATIC_URL = import.meta.env.VITE_STATIC_URL || ""
+const STATIC_URL = import.meta.env.VITE_STATIC_URL || "/static"
 
 export default function IndexPage() {
   const { urls, query, setQuery, destroy, setDestroy, remove, load, debounced } = useTiramisoData()
