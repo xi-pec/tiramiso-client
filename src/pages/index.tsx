@@ -29,8 +29,16 @@ export default function IndexPage() {
           <Header auth={auth}/>  
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 grid place-items-center">
+          <Image
+            isBlurred
+            src="/icon.png"
+            disableSkeleton={true}
+            className="h-[5rem] sm:h-[7rem] mb-8"
+          />
+
           <h1 className="w-full text-5xl sm:text-7xl text-center font-bold text-primary font-[Larken]">TIRAMISO</h1>
+
           <h2 className="w-full text-xl sm:text-3xl text-center font-light text">Transformer-based Item Recognition for Actively Missing Objects</h2>
         </div>
         
@@ -74,7 +82,7 @@ export default function IndexPage() {
             })
           }
         </div>
-        
+
         : <div className="rounded-lg z-2 col-1 row-1 w-full h-full grid place-items-center opacity-25">
           <Spinner color="primary" size="lg" variant="dots"/>
         </div>
