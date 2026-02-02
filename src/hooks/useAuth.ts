@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
+import { addToast } from "@heroui/toast"
 
 const API_URL = import.meta.env.VITE_API_URL || "/api"
 console.log(import.meta.env.VITE_API_URL)
@@ -23,15 +24,35 @@ export function useAuth() {
     switch(json.code) {
       case 0:
         setLogged(true)
+        addToast({
+          title: "Successfully logged in!",
+          variant: "solid",
+          color: "success"
+        })
       break
 
       case 1:
-        console.log("already logged in")
-        setLogged(true)
+        addToast({
+          title: "Already logged in!",
+          variant: "solid",
+          color: "danger"
+        })
+      break
+
+      case 2:
+        addToast({
+          title: "Invalid credentails!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       default:
-        console.log("??")
+        addToast({
+          title: "Unexpected error occured!",
+          variant: "solid",
+          color: "warning"
+        })
     }
 
     return !json.code
@@ -48,15 +69,28 @@ export function useAuth() {
     switch(json.code) {
       case 0:
         setLogged(false)
+        addToast({
+          title: "Successfully logged out!",
+          variant: "solid",
+          color: "success"
+        })
       break
 
       case 1:
-        console.log("not logged in")
         setLogged(false)
+        addToast({
+          title: "Not logged in!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       default:
-        console.log("??")
+        addToast({
+          title: "Unexpected error occured!",
+          variant: "solid",
+          color: "warning"
+        })
     }
 
     return !json.code
@@ -66,12 +100,8 @@ export function useAuth() {
     const response = await fetch(`${API_URL}/validate`, { credentials: "include" })
     const json = await response.json()
 
-    if (json.code === 0) {
-      setLogged(true)
-    } else {
-      setLogged(false)
-    }
-
+    setLogged(json.code === 0)
+    
     return !json.code
   }
 

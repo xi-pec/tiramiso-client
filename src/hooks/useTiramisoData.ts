@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
+import { addToast } from "@heroui/toast"
 
 const API_URL = import.meta.env.VITE_API_URL || "/api"
 
@@ -22,11 +23,19 @@ export function useTiramisoData() {
         break
 
         case 1:
-          console.log("missing query")
+          addToast({
+            title: "Missing query parameter!",
+            variant: "solid",
+            color: "danger"
+          })
         break
 
         default:
-          console.log("??")
+          addToast({
+            title: "Unexpected error occured!",
+            variant: "solid",
+            color: "warning"
+          })
       }
     } else {
       const response = await fetch(`${API_URL}/list`)
@@ -42,7 +51,11 @@ export function useTiramisoData() {
         break
 
         default:
-          console.log("??")
+          addToast({
+            title: "Unexpected error occured!",
+            variant: "solid",
+            color: "warning"
+          })
       }
     }
 
@@ -63,18 +76,44 @@ export function useTiramisoData() {
       case 0:
         if (debounced) load(debounced)
         else load()
+
+        addToast({
+          title: "Successfully removed item!",
+          variant: "solid",
+          color: "success"
+        })
       break
 
       case 1:
-        console.log("missing item arg")
+        addToast({
+          title: "Not logged in!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       case 2:
-        console.log("does not exist")
+        addToast({
+          title: "Missing item parameter!",
+          variant: "solid",
+          color: "danger"
+        })
+      break
+
+      case 3:
+        addToast({
+          title: "Item does not exist!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       default:
-        console.log("??")
+        addToast({
+          title: "Unexpected error occured!",
+          variant: "solid",
+          color: "warning"
+        })
     }
   }
 

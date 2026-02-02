@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDisclosure } from "@heroui/modal"
+import { addToast } from "@heroui/toast"
 
 const API_URL = import.meta.env.VITE_API_URL || "/api"
 
@@ -26,23 +27,54 @@ export function useUploader(load: (query?: string) => void, query: string) {
     switch(json.code) {
       case 0:
         query ? load(query) : load()
+
+        addToast({
+          title: "Successfully uploaded item!",
+          variant: "solid",
+          color: "success"
+        })
+
         return true
       break
-
+      
       case 1:
-        console.log("no file uploaded")
+        addToast({
+          title: "Not logged in!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       case 2:
-        console.log("file not allowed")
+        addToast({
+          title: "File is missing!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       case 3:
-        console.log("file already exists")
+        addToast({
+          title: "File type is not allowed!",
+          variant: "solid",
+          color: "danger"
+        })
+      break
+
+      case 4:
+        addToast({
+          title: "File already exists!",
+          variant: "solid",
+          color: "danger"
+        })
       break
 
       default:
-        console.log("??")
+        addToast({
+          title: "Unexpected error occured!",
+          variant: "solid",
+          color: "warning"
+        })
     }
   }
 
