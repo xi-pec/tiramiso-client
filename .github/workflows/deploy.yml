@@ -33,7 +33,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_API_URL: https://api.tiramiso.uma-musu.me/api
+          VITE_API_URL: https://api.uma-musu.me
 
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
