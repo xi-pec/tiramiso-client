@@ -7,8 +7,11 @@ export function useTiramisoData() {
   const [query, setQuery] = useState<string>("")
   const [debounced, setDebounced] = useState(query)
   const [destroy, setDestroy] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const load = useCallback(async (query?: string, start: number = 0, count: number = 100) => {
+    setLoaded(false)
+
     if (query) {
       const response = await fetch(`${API_URL}/search?query=${encodeURIComponent(query)}&start=${start}&count=${count}`)
       const json = await response.json()
@@ -42,6 +45,8 @@ export function useTiramisoData() {
           console.log("??")
       }
     }
+
+    setLoaded(true)
   }, [])
 
   async function remove(item: string) {
@@ -83,5 +88,5 @@ export function useTiramisoData() {
     else load()
   }, [debounced])
 
-  return { urls, query, setQuery, debounced, destroy, setDestroy, remove, load }
+  return { urls, query, setQuery, debounced, destroy, setDestroy, remove, load, loaded }
 }

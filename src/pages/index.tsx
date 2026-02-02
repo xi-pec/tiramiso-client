@@ -2,6 +2,7 @@ import DefaultLayout from "@/layouts/default"
 import { Image } from "@heroui/image"
 import { Divider } from "@heroui/divider"
 import { useState } from "react"
+import { Spinner } from "@heroui/spinner";
 
 import { useTiramisoData } from "@/hooks/useTiramisoData"
 import { useUploader } from "@/hooks/useUploader"
@@ -15,7 +16,7 @@ import { LoginModal } from "@/components/LoginModal"
 const STATIC_URL = import.meta.env.VITE_STATIC_URL || "/static"
 
 export default function IndexPage() {
-  const { urls, query, setQuery, destroy, setDestroy, remove, load, debounced } = useTiramisoData()
+  const { urls, query, setQuery, destroy, setDestroy, remove, load, loaded, debounced } = useTiramisoData()
   const uploader = useUploader(load, query)
   const auth = useAuth()
   const { gridRef } = useGridResize(load)
@@ -46,7 +47,7 @@ export default function IndexPage() {
 
         <Divider />
 
-        <div ref={gridRef} className="flex-1 min-h-0 overflow-y-auto grid grid-cols-[repeat(auto-fit,150px)] auto-rows-[150px] gap-4 justify-center box-border m-4">
+        {loaded ? <div ref={gridRef} className="z-1 col-1 row-1 flex-1 min-h-0 overflow-y-auto grid grid-cols-[repeat(auto-fit,150px)] auto-rows-[150px] gap-4 justify-center box-border m-4">
           {auth.logged && <Image
             isZoomed
             className="p-12 bg-default-200"
@@ -73,6 +74,11 @@ export default function IndexPage() {
             })
           }
         </div>
+        
+        : <div className="rounded-lg z-2 col-1 row-1 w-full h-full grid place-items-center opacity-25">
+          <Spinner color="primary" size="lg" variant="dots"/>
+        </div>
+        }
       </div>
 
       <UploadModal uploader={uploader} />
